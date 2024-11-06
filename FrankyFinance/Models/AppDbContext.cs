@@ -16,6 +16,15 @@ namespace FrankyFinance.Models
         {
             modelBuilder.Entity<MiembroGrupo>().HasKey(mg => new { mg.UsuarioId, mg.GrupoId });
             modelBuilder.Entity<GastoCompartido>().HasKey(gc => new { gc.UsuarioId, gc.GastoId });
+
+            modelBuilder.Entity<Usuario>(Usuario =>
+            {
+                Usuario.HasKey(e => e.Id);
+                Usuario.ToTable("Usuarios");
+                Usuario.Property(n => n.Nombre).IsRequired().HasMaxLength(300).IsUnicode(true);
+                Usuario.Property(e => e.Email).IsRequired().HasMaxLength(150);
+                Usuario.Property(c => c.Contrasena).IsRequired().HasMaxLength(12);
+            });
         }
     }
 }
